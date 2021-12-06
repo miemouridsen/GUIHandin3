@@ -1,32 +1,37 @@
 <template>
-     <form @submit.prevent="addManager">
+     <div class="addManager">
+         <h1>Create new manager:</h1>
+         <form @submit.prevent="addManager">
     <div id="felt" >
         <label name="firstname"> Fist Name: </label>
-        <input type="text" for="firstname" v-model="manager.firstName"/>
+        <input type="text" for="firstname" v-model="manager.firstName" required/>
     </div>
 
     <div id="felt">
         <label name="lastname"> Last Name: </label>
-        <input type="text" for="lastname" v-model="manager.lastName"/>
+        <input type="text" for="lastname" v-model="manager.lastName" required/>
     </div>
 
     <div id="felt">
         <label name="email" > Email: </label>
-        <input type="mail" for="email" v-model="manager.email"/>
+        <input type="email" for="email" v-model="manager.email" required/>
     </div>
 
     <div id="felt">
         <label name="password" > Password: </label>
-        <input type="password" for="password" v-model="manager.password"/>
+        <input type="password" for="password" v-model="manager.password" required/>
     </div>
 
     <div id="button">
         <input type="submit" value="Register" />
     </div>
      </form>
+     </div>
 </template>
 
 <script>
+import {postManager} from "../../Services/UserService.js";
+
 export default {
     data(){
         return{
@@ -37,16 +42,18 @@ export default {
                     password: ""
             }
         }
-    },methods:{
+    },methods: {
         async addManager(){
-            alert(JSON.stringify(this.manager));
+            //alert(JSON.stringify(this.manager));
+            await postManager(this.manager);
+
         }
     }
 }
 </script>
 
 <style scoped>
-form{
+.addManager{
     margin: 60px;
     padding: 90px;
     background: royalblue;
@@ -56,6 +63,7 @@ form{
 }
 #felt{
     margin-top: 15px;
+    text-align: left;
 }
 
 #button{
