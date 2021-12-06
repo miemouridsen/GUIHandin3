@@ -7,15 +7,19 @@ import ModelNav from "./components/Model/ModelNav.vue"
 import AddExpense from "./components/Model/AddExpense.vue"
 import AddModel from "./components/Manager/AddModel.vue"
 import SeeJobs from "./components/Manager/SeeJobs.vue"
+import AddManager from "./components/Manager/AddManager.vue"
+
 
 const routes = [
     {path: "/", component: LoginForm},
     {path: "/manager", component: ManagerNav, children : [
         {path: "addModel", component: AddModel},
-        {path: "seeJobs", component: SeeJobs}
+        {path: "seeJobs", component: SeeJobs},
+        {path: "AddManager", component: AddManager },
+
     ]},
     {path: "/model", component: ModelNav, children : [
-        {path: "addExpense", component: AddExpense},
+
     ]}
 ]
 
