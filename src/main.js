@@ -19,7 +19,7 @@ const routes = [
 
     ]},
     {path: "/model", component: ModelNav, children : [
-
+        {path: "addExpense", component: AddExpense}
     ]}
 ]
 
