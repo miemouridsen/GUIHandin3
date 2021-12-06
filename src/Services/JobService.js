@@ -23,7 +23,6 @@ export const getJobs = async () => {
 
   export const postModelToJob = async (jobId, modelId) => {
     let url = "https://localhost:44368/api/jobs/" + jobId + "/model/" + modelId;
-    alert(url);
     try {
       let response = await fetch(url, {
         method: "POST", 
