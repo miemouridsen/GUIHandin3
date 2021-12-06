@@ -11,7 +11,6 @@ export const getJobs = async () => {
   
       if (response.ok) {
         const data = await response.json();
-        alert(JSON.stringify(data));
         return data;
       } else {
         alert("Server returned: " + response.statusText);

@@ -4,7 +4,7 @@
 </template>
 
 <script>
-import { addNewExpense } from "../Services/ExpenseService.js";
+import { addNewExpense } from "../../Services/ExpenseService.js";
 
 export default {
     data() {
