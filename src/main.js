@@ -8,6 +8,7 @@ import AddExpense from "./components/Model/AddExpense.vue"
 import AddModel from "./components/Manager/AddModel.vue"
 import SeeJobs from "./components/Manager/SeeJobs.vue"
 import AddManager from "./components/Manager/AddManager.vue"
+import AddModelToJob from "./components/Manager/AddModelToJob.vue"
 
 
 const routes = [
@@ -16,6 +17,7 @@ const routes = [
         {path: "addModel", component: AddModel},
         {path: "seeJobs", component: SeeJobs},
         {path: "AddManager", component: AddManager },
+        {path: "addModelToJob", component: AddModelToJob },
 
     ]},
     {path: "/model", component: ModelNav, children : [
