@@ -47,7 +47,7 @@
       <label>Password:</label> <br />
       <input type="password" v-model="model.password" required />
       <br />
-      <button type="submit">Login</button> <br />
+      <button type="submit">Add Model to Database</button> <br />
     </form>
   </div>
 </template>

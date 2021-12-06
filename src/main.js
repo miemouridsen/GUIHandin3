@@ -9,6 +9,7 @@ import AddModel from "./components/Manager/AddModel.vue"
 import SeeJobs from "./components/Manager/SeeJobs.vue"
 import AddManager from "./components/Manager/AddManager.vue"
 import AddModelToJob from "./components/Manager/AddModelToJob.vue"
+import RemoveJobFromModel from "./components/Manager/RemoveJobFromModel.vue"
 
 const routes = [
     {path: "/", component: LoginForm},
@@ -17,6 +18,7 @@ const routes = [
         {path: "seeJobs", component: SeeJobs},
         {path: "AddManager", component: AddManager },
         {path: "addModelToJob", component: AddModelToJob },
+        {path: "removeModelFromJob", component: RemoveJobFromModel}
 
     ]},
     {path: "/model", component: ModelNav, children : [

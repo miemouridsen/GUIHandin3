@@ -1,11 +1,12 @@
 <template>
-  <form @submit.prevent="ModelToJob">
-    <label>Model:</label>
+  <label>Model:</label>
+  <form @submit.prevent="RemoveModelFromJob">
     <select v-model="modelId">
       <option
         v-for="model in models"
         :key="model.efModelId"
         v-bind:value="model.efModelId"
+        v-on:change="changedModel()"
       >
         {{ model.firstName }} {{ model.lastName }}
       </option>
@@ -22,37 +23,41 @@
     <br />
     <br />
 
-    <button type="submit">Add Model to Job</button> <br />
+    <button type="submit">Remove Model to Job</button> <br />
   </form>
 </template>
 
 <script>
 import { getModels } from "../../Services/UserService.js";
-import { getJobs, postModelToJob } from "../../Services/JobService.js";
+import { getJob } from "../../Services/JobService.js";
 
 export default {
   async created() {
     this.models = await getModels();
     if (this.models !== []) {
       this.modelId = this.models[0].efModelId;
-      this.jobs = await getJobs();
-      if (this.jobs !== []) {
-        this.jobId = this.jobs[0].efJobId;
-      }
+      this.model = this.models[0];
+      alert(JSON.stringify(this.model));
+      this.jobs = this.model.jobModels;
+      alert(JSON.stringify(this.jobs));
     }
   },
   data() {
     return {
       models: [],
       jobs: [],
-      jobId: 0,
+      model: {},
       modelId: 0,
+      jobId: 0,
     };
   },
   methods: {
-    async ModelToJob() {
-      postModelToJob(this.jobId, this.modelId);
+    async changedModel() {
+      this.jobs = await getJob(this.modelId);
     },
+    async RemoveModelFromJob() {
+        alert(this.modelId + " " + this.jobId);
+    }
   },
 };
 </script>
