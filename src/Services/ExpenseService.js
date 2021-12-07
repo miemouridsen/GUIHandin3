@@ -1,5 +1,5 @@
 export const addNewExpense = async (form) => {
-    let url = "https://localhost:44368/api/expenses";
+    let url = "https://localhost:44368/api/Expenses";
     await fetch(url, {
         method: "POST",
         body: JSON.stringify(form), // Assumes data is in an object called form 
