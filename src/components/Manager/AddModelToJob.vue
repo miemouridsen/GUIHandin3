@@ -66,15 +66,16 @@ export default {
   },
   methods: {
     async ModelToJob() {
-      await postModelToJob(this.jobId, this.model.efModelId);
-      this.IsModelAlreadyInJob();
+      const isPosted = await postModelToJob(this.jobId, this.model.efModelId);
+      if (isPosted) {
+        this.error = "Model has been added to job!";
+        this.isDisabled = true;
+      }
     },
 
     async IsModelAlreadyInJob() {
-      console.log(this.jobId);
       if (this.jobId !== 0) {
         const job = await getJob(this.jobId);
-        console.log(JSON.stringify(job));
         let onJob = false;
         if (job !== null) {
           job.models.forEach((element) => {
@@ -83,7 +84,6 @@ export default {
             }
           });
           if (onJob) {
-            console.log(onJob);
             this.error = "Model is already on job.";
             this.isDisabled = true;
           } else {
