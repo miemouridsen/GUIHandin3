@@ -68,11 +68,10 @@ export default {
     async ModelToJob() {
       const isPosted = await postModelToJob(this.jobId, this.model.efModelId);
       if (isPosted) {
-        this.error = "Model has been added to job!";
+        this.error = "Model has been added to the job!";
         this.isDisabled = true;
       }
     },
-
     // Checks if a model is already on a job.
     // Gets the currently selected job and checks
     // if the currently selected user is on the job.
@@ -88,7 +87,7 @@ export default {
             }
           });
           if (onJob) {
-            this.error = "Model is already on job.";
+            this.error = "Model is already on the job.";
             this.isDisabled = true;
           } else {
             this.error = "";

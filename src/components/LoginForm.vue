@@ -81,7 +81,6 @@ button[type="submit"] {
 }
 
 button:disabled {
-  background-color: red;
   opacity: 30%;
 }
 
