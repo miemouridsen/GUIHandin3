@@ -35,9 +35,9 @@ export default {
     this.models = await getModels();
     if (this.models !== []) {
       this.model = await getModel(this.models[0].efModelId);
-      alert(JSON.stringify(this.model));
+      //alert(JSON.stringify(this.model));
       this.jobs = this.model.jobModels;
-      alert(JSON.stringify(this.jobs));
+      //alert(JSON.stringify(this.jobs));
     }
   },
   data() {

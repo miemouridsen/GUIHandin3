@@ -80,6 +80,10 @@ button[type="submit"] {
   margin: 1rem;
 }
 
+button:disabled {
+  background-color: red;
+}
+
 /* Style the container */
 .login {
   border-radius: 5px;
