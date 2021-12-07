@@ -1,11 +1,11 @@
 <template>
   <label>Model:</label>
   <form @submit.prevent="RemoveModelFromJob">
-    <select v-model="modelId">
+    <select v-model="model">
       <option
         v-for="model in models"
         :key="model.efModelId"
-        v-bind:value="model.efModelId"
+        v-bind:value="model"
         v-on:change="changedModel()"
       >
         {{ model.firstName }} {{ model.lastName }}
@@ -28,15 +28,13 @@
 </template>
 
 <script>
-import { getModels } from "../../Services/UserService.js";
-import { getJob } from "../../Services/JobService.js";
+import { getModels, getModel } from "../../Services/UserService.js";
 
 export default {
   async created() {
     this.models = await getModels();
     if (this.models !== []) {
-      this.modelId = this.models[0].efModelId;
-      this.model = this.models[0];
+      this.model = await getModel(this.models[0].efModelId);
       alert(JSON.stringify(this.model));
       this.jobs = this.model.jobModels;
       alert(JSON.stringify(this.jobs));
@@ -47,16 +45,16 @@ export default {
       models: [],
       jobs: [],
       model: {},
-      modelId: 0,
       jobId: 0,
     };
   },
   methods: {
     async changedModel() {
-      this.jobs = await getJob(this.modelId);
+      this.jobs = await getModel(this.model.efModelId);
+      alert(JSON.stringify(this.jobs));
     },
     async RemoveModelFromJob() {
-        alert(this.modelId + " " + this.jobId);
+        alert(this.model.efModelId + " " + this.jobId);
     }
   },
 };
