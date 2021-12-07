@@ -99,7 +99,7 @@ export default {
           zip: "",
           city: "",
           country: "",
-          birthDate: "2021-12-06T11:28:49.006Z",
+          birthDate: "",
           nationality: "",
           height: 0,
           shoeSize: 0,
