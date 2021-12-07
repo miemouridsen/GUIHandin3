@@ -9,8 +9,5 @@ export const addNewExpense = async (form) => {
             "Content-Type": "application/json"
         }
     })
-    .then(responseJSON => {
-        this.response = responseJSON;
-    })
     .catch(error => alert("Something bad happened: " + error));   
 }
