@@ -73,6 +73,10 @@ export default {
       }
     },
 
+    // Checks if a model is already on a job.
+    // Gets the currently selected job and checks
+    // if the currently selected user is on the job.
+    // Is fire every time select elements are changed.
     async IsModelAlreadyInJob() {
       if (this.jobId !== 0) {
         const job = await getJob(this.jobId);
