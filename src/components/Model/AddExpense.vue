@@ -1,6 +1,6 @@
 <template>
     <select v-model="newExpense.jobId">
-        <option v-for="job in jobs" v-bind:key="job.efJobId">
+        <option v-for="job in jobs" v-bind:value="job.efJobId" v-bind:key="job.efJobId">
             <p>{{ job.customer }}</p>
         </option>   
     </select>
@@ -24,7 +24,8 @@ import { getUser } from "../../Services/LoginService.js"
 export default {
     async created() {
         this.jobs = await getJobs();
-        this.newExpense.modelId = await getUser().modelId;
+        var user = await getUser();
+        this.newExpense.modelId = parseInt(user.ModelId);
         },
     data() {
         return { 
@@ -41,14 +42,8 @@ export default {
     },
     methods: {
         async addExpense() {
-            //var date = new Date(this.newExpense.date);
-            //this.newExpense.date = "2021-12-12";
             await addNewExpense(this.newExpense);
         }
     }
 }
 </script>
-
-<style>
-
-</style>
