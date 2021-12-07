@@ -20,10 +20,11 @@
       <button type="submit">Add new job to database</button> <br />
     </form>
   </div>
+  <p>{{ response }}</p>
 </template>
 
 <script>
-import { postJob } from '../../Services/JobService';
+import { postJob } from "../../Services/JobService";
 
 export default {
   data() {
@@ -36,12 +37,25 @@ export default {
         comments: "",
         models: [],
       },
+      response: "",
     };
-  }, methods: {
-      async addNewJob() {
-          await postJob(this.newJob);
-      }
-  }
+  },
+  methods: {
+    async addNewJob() {
+      const postSucceded = await postJob(this.newJob);
+      if (postSucceded) {
+        this.response = "Succesfully added job to database.";
+        this.newJob = {
+          customer: "",
+          startDate: "",
+          days: 0,
+          location: "",
+          comments: "",
+          models: [],
+        };
+      } else this.response = "Something went wrong";
+    },
+  },
 };
 </script>
 
