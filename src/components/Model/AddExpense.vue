@@ -1,4 +1,5 @@
 <template>
+    <h1>Here you can add a new expense</h1>
     <form @submit.prevent="addExpense"> 
         <label>Job:</label>
         <select v-model="newExpense.jobId" required>

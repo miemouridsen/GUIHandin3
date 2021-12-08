@@ -33,7 +33,7 @@
       </div>
 
       <div id="button">
-        <input type="submit" value="Register" />
+        <button type="submit" value="Register" >Add new manager</button>
       </div>
     </form>
   </div>
@@ -63,21 +63,4 @@ export default {
 </script>
 
 <style scoped>
-.addManager {
-  margin: 60px;
-  padding: 90px;
-  background: royalblue;
-
-  -webkit-box-shadow: 5px 5px 15px 5px #000000;
-  box-shadow: 5px 5px 15px 5px #000000;
-}
-#felt {
-  margin-top: 15px;
-  text-align: left;
-}
-
-#button {
-  margin-top: 15px;
-  align-content: center;
-}
 </style>
