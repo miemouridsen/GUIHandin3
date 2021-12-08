@@ -1,23 +1,26 @@
 <template>
-  <label>Model:</label>
   <form @submit.prevent="RemoveModelFromJob">
-    <select v-model="model">
+    <label>Job:</label>
+    <select v-model="job" :on-change="changedModel()">
       <option
-        v-for="model in models"
-        :key="model.efModelId"
-        v-bind:value="model"
-        v-on:change="changedModel()"
+        v-for="job in jobs"
+        :key="job.efJobId"
+        v-bind:value="job"
       >
-        {{ model.firstName }} {{ model.lastName }}
+        {{ job.customer }} - {{ job.location }}
       </option>
     </select>
     <br />
     <br />
 
-    <label>Job:</label>
-    <select v-model="jobId">
-      <option v-for="job in jobs" :key="job.efJobId" v-bind:value="job.efJobId">
-        {{ job.customer }} - {{ job.location }}
+    <label>Model:</label>
+    <select v-model="model">
+      <option
+        v-for="model in models"
+        :key="model.efModelId"
+        v-bind:value="model"
+      >
+        {{ model.firstName }} {{ model.lastName }}
       </option>
     </select>
     <br />
@@ -28,34 +31,45 @@
 </template>
 
 <script>
-import { getModels, getModel } from "../../Services/UserService.js";
+import { getJob, getJobs } from "../../Services/JobService.js";
+import { getModels } from "../../Services/UserService.js";
 
 export default {
   async created() {
-    this.models = await getModels();
-    if (this.models !== []) {
-      this.model = await getModel(this.models[0].efModelId);
-      //alert(JSON.stringify(this.model));
-      this.jobs = this.model.jobModels;
-      //alert(JSON.stringify(this.jobs));
+    this.jobs = await getJobs();
+    if (this.jobs !== []) {
+      this.job = this.jobs[0];
+      this.allModels = await getModels();
     }
   },
   data() {
     return {
+      allModels: [],
       models: [],
       jobs: [],
       model: {},
-      jobId: 0,
+      job: {},
     };
   },
   methods: {
-    async changedModel() {
-      this.jobs = await getModel(this.model.efModelId);
-      alert(JSON.stringify(this.jobs));
-    },
     async RemoveModelFromJob() {
-        alert(this.model.efModelId + " " + this.jobId);
-    }
+      await this.RemoveModelFromJob(this.job.efJobId, this.model.efModelId);
+    },
+    async changedModel() {
+      if (this.job !== {}) {
+        let tempModels = [];
+        let tempAllModels = this.allModels;
+        let job = await getJob(this.job.efJobId);
+        job.models.forEach((jobElement) => {
+          tempAllModels.forEach((modelElement) => {
+            if (jobElement.email === modelElement.email) {
+              tempModels.push(modelElement);
+            }
+          });
+        });
+        this.models = tempModels;
+      }
+    },
   },
 };
 </script>

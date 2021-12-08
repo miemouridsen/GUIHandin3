@@ -66,6 +66,28 @@ export const postModelToJob = async (jobId, modelId) => {
   return false;
 }
 
+export const removeModelToJob = async (jobId, modelId) => {
+  let url = "https://localhost:44368/api/jobs/" + jobId + "/model/" + modelId;
+  try {
+    let response = await fetch(url, {
+      method: "DELETE",
+      headers: new Headers({
+        'Authorization': 'Bearer ' + localStorage.getItem("token"),
+        "Content-Type": "application/json"
+      })
+    });
+
+    if (response.ok) {
+      return true;
+    } else {
+      alert("Server returned: " + response.statusText);
+    }
+  } catch (err) {
+    alert("Error: " + err);
+  }
+  return false;
+}
+
 export const postJob = async (form) => {
   let url = "https://localhost:44368/api/jobs";
   try {

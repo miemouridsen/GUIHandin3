@@ -45,49 +45,5 @@ export default {
 </script>
 
 <style>
-/* Navbar navigation styling from https://www.w3schools.com/howto/howto_css_responsive_form.asp */
 
-/* Style inputs, select elements and textareas */
-input,
-select,
-textarea {
-  width: 100%;
-  padding: 12px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  box-sizing: border-box;
-  resize: vertical;
-}
-
-input:invalid {
-  border-bottom-color: red;
-}
-
-/* Style the label to display next to the inputs */
-label {
-  padding: 12px 12px 12px 0;
-  display: inline-block;
-}
-
-/* Style the submit button */
-button[type="submit"] {
-  background-color: #04aa6d;
-  color: white;
-  padding: 12px 20px;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  margin: 1rem;
-}
-
-button:disabled {
-  opacity: 30%;
-}
-
-/* Style the container */
-.login {
-  border-radius: 5px;
-  background-color: #f2f2f2;
-  padding: 20px;
-}
 </style>
