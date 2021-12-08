@@ -15,6 +15,7 @@
         <input type="date" v-model="newExpense.date" required/>
         <button type="submit">Add New Expense</button>
     </form>
+    <p>{{ response }}</p>
 </template>
 
 <script>
@@ -37,13 +38,21 @@ export default {
                 text: "",
                 amount: 0,
             },
-            jobs:[] 
+            jobs:[],
+            response: "" 
         }
         
     },
     methods: {
         async addExpense() {
             await addNewExpense(this.newExpense);
+            this.newExpense = {
+                modelId: 0,
+                jobId: 0,
+                date: "",
+                text: "",
+                amount: 0,
+            };
         }
     }
 }

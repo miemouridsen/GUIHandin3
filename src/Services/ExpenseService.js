@@ -8,6 +8,5 @@ export const addNewExpense = async (form) => {
             "Authorization": "Bearer " + localStorage.getItem("token"),
             "Content-Type": "application/json"
         }
-    })
-    .catch(error => alert("Something bad happened: " + error));   
+    }).catch(error => alert("Something bad happened: " + error));   
 }
