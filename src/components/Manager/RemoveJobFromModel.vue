@@ -1,18 +1,5 @@
 <template>
   <form @submit.prevent="RemoveModelFromJob">
-    <label>Job:</label>
-    <select v-model="job" :on-change="changedModel()">
-      <option
-        v-for="job in jobs"
-        :key="job.efJobId"
-        v-bind:value="job"
-      >
-        {{ job.customer }} - {{ job.location }}
-      </option>
-    </select>
-    <br />
-    <br />
-
     <label>Model:</label>
     <select v-model="model">
       <option
@@ -26,49 +13,65 @@
     <br />
     <br />
 
+    <label>Job:</label>
+    <select v-model="job">
+      <option v-for="job in jobs" :key="job.jobId" v-bind:value="job">
+        {{ job.customer }} - {{ job.location }}
+      </option>
+    </select>
+    <br />
+    <br />
+
     <button type="submit">Remove Model to Job</button> <br />
   </form>
+  <p>{{message}}</p>
 </template>
 
 <script>
-import { getJob, getJobs } from "../../Services/JobService.js";
+import { getJobsForModel, removeModelToJob } from "../../Services/JobService.js";
 import { getModels } from "../../Services/UserService.js";
 
 export default {
   async created() {
-    this.jobs = await getJobs();
-    if (this.jobs !== []) {
-      this.job = this.jobs[0];
-      this.allModels = await getModels();
+    this.models = await getModels();
+    if (this.models !== []) {
+      this.model = this.models[0];
     }
   },
   data() {
     return {
-      allModels: [],
       models: [],
       jobs: [],
       model: {},
       job: {},
+      message: ""
     };
+  },
+  watch: {
+    model: async function () {
+      if (this.model !== {}) {
+        let modelJobs = await getJobsForModel(this.model.efModelId);
+        this.jobs = modelJobs.jobs;
+        if (this.jobs !== []) {
+          this.job = this.jobs[0];
+        }
+      }
+    },
   },
   methods: {
     async RemoveModelFromJob() {
-      await this.RemoveModelFromJob(this.job.efJobId, this.model.efModelId);
-    },
-    async changedModel() {
-      if (this.job !== {}) {
-        let tempModels = [];
-        let tempAllModels = this.allModels;
-        let job = await getJob(this.job.efJobId);
-        job.models.forEach((jobElement) => {
-          tempAllModels.forEach((modelElement) => {
-            if (jobElement.email === modelElement.email) {
-              tempModels.push(modelElement);
-            }
-          });
-        });
-        this.models = tempModels;
-      }
+      let succeded = await removeModelToJob(
+        this.job.jobId,
+        this.model.efModelId
+      );
+      if (succeded) {
+        this.message = "Model succesfully removed from job."
+        let modelJobs = await getJobsForModel(this.model.efModelId);
+        this.jobs = modelJobs.jobs;
+        if (this.jobs !== []) {
+          this.job = this.jobs[0];
+        }
+      } else this.message = "Something went wrong."
     },
   },
 };
