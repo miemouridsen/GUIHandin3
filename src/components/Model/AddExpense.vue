@@ -1,18 +1,18 @@
 <template>
-    <select v-model="newExpense.jobId">
-        <option v-for="job in jobs" v-bind:value="job.efJobId" v-bind:key="job.efJobId">
-            <p>{{ job.customer }}</p>
-        </option>   
-    </select>
-
     <form @submit.prevent="addExpense"> 
-        <label>Expense Description</label>
+        <label>Job:</label>
+        <select v-model="newExpense.jobId" required>
+            <option v-for="job in jobs" v-bind:value="job.efJobId" v-bind:key="job.efJobId">
+                <p>{{ job.customer }}</p>
+            </option>   
+        </select>
+        <label>Expense Description:</label>
         <input type="text" v-model="newExpense.text" required/>
-        <label>Price of Expense</label>
+        <label>Price of Expense:</label>
         <input type="number" v-model="newExpense.amount" required/>
-        <label>Date</label>
+        <label>Date:</label>
         <input type="date" v-model="newExpense.date" required/>
-        <input type="submit" value="Add New Expense"/>
+        <button type="submit">Add New Expense</button>
     </form>
 </template>
 
@@ -47,3 +47,9 @@ export default {
     }
 }
 </script>
+
+<style scoped>
+    button {
+        margin: 10px;
+    }
+</style>
