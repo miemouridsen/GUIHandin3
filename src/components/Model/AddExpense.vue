@@ -15,7 +15,6 @@
         <input type="date" v-model="newExpense.date" required/>
         <button type="submit">Add New Expense</button>
     </form>
-    <p>{{ response }}</p>
 </template>
 
 <script>
@@ -39,7 +38,6 @@ export default {
                 amount: 0,
             },
             jobs:[],
-            response: "" 
         }
         
     },
